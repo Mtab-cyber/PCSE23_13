@@ -145,25 +145,3 @@ class plotting():
         plot_url = base64.b64encode(img2.getvalue())
         
         return plot_url.decode('utf-8')
-
-"""Twitter App using Flask"""
-
-from flask import Flask, request, render_template
-
-app = Flask("Project")
-
-@app.route('/')
-def home():
-  return render_template('Twitter.html')
-
-@app.route('/keyword',methods=['POST','GET'])
-def keyword():
-  val=request.from["keyword"]
-  word=keyword.key(val)
-  polarity=plotting.PolarityAndSubjectivity(word)
-  word_cld=plotting.show_wordcloud(word['tweets'])
-  negative_positive_plot=plotting.sentiment(word)
-  return render_template('Twitter.html',prediction=word['tweets'].head(),Top_Five_Tweets="Top Five Raw Tweets:",plot=word_cld,Word_cloud="Word Cloud for common words used in the Tweets",plot_polarity=polarity,polatiry_plot="Relationship between Subjectivity and Polarity",plot_sentiment=negative_positive_plot,Sentiment="Count of Positive, Negative and Neutral Tweets")
-
-if __name__ == "__main__":
-    app.run()
