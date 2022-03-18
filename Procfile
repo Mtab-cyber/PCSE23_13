@@ -1,1 +1,1 @@
-web: gunicorn pcse23:Project
+web: gunicorn project:Project
